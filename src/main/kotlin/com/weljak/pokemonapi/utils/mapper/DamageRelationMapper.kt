@@ -8,6 +8,8 @@ import kotlin.collections.HashMap
 
 object DamageRelationMapper {
     private val damageModifiersNamesMapping = mapOf("double_damage_to" to "doubleDamageTo", "half_damage_to" to "halfDamageTo", "no_damage_to" to "noDamageTo")
+    private val normalDamageTo = "normalDamageTo"
+    private var damageTypes = DamageType.values().toHashSet()
 
     fun toDamageRelationsResponse(response: PokeApiResponse, attackType: DamageType, pokemonTypes: Set<DamageType>): GetDamageRelationsResponse {
         val damageRelations = HashMap<String, Set<DamageType>>()
@@ -22,10 +24,12 @@ object DamageRelationMapper {
                         } else {
                             damageRelations[damageModifierName.value] = setOf(damageType)
                         }
+                        damageTypes.remove(damageType)
                     }
                 }
             }
         }
+        damageRelations[normalDamageTo] = damageTypes
         return GetDamageRelationsResponse(attackType, damageRelations)
     }
 

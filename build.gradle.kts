@@ -15,17 +15,23 @@ repositories {
     mavenCentral()
 }
 
+tasks.test {
+    useJUnitPlatform()
+}
+
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+    implementation("org.springframework.boot:spring-boot-starter-web:2.6.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.13.1")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("io.github.microutils:kotlin-logging:1.12.5")
-//    implementation("com.squareup.okhttp3:logging-interceptor:4.9.3")
+    implementation("io.github.microutils:kotlin-logging:2.1.21")
     implementation("com.google.code.gson:gson:2.8.9")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    //test
+    testImplementation("org.springframework.boot:spring-boot-starter-test:2.6.3")
+    testImplementation(kotlin("test"))
 }
 
 tasks.withType<KotlinCompile> {
